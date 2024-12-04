@@ -7,7 +7,31 @@ from utils import normalize_features, one_hot_encode
 import numpy as np
 import random
 
+def write_results_to_file(output_path, results):
+    """
+    Writes the results to a formatted output file.
+
+    Params:
+    - output_path (str): Path to the output file.
+    - results (dict): Dictionary containing results for each part.
+    """
+    with open(output_path, 'w') as file:
+        file.write("Handwritten Digit Classification Results\n")
+        file.write("=" * 50 + "\n\n")
+        
+        for part, data in results.items():
+            file.write(f"## {part}\n")
+            file.write("-" * 50 + "\n")
+            for key, value in data.items():
+                file.write(f"{key}: {value}\n")
+            file.write("\n")
+        file.write("=" * 50 + "\n")
+        file.write("End of Results\n")
+
 def main():
+    output_file = "classification_results.txt"
+    results = {}
+
     # Part 1: Binary Classification for digits 7 and 9
     print("Part 1: Binary Classification for digits 7 and 9")
     # Load data for digits 7 and 9
@@ -71,6 +95,13 @@ def main():
     test_accuracy = np.mean(test_predictions == y_test)
     print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
 
+    # Save results for Part 1
+    results["Binary Classification (Part 1)"] = {
+        "Minimum Validation Error Fraction": f"{min_error_frac:.4f}",
+        "Test Accuracy": f"{test_accuracy * 100:.2f}%",
+        "Context": "Binary classification of digits 7 and 9 using perceptron."
+    }
+
     # Part 2: Multiclass Classification for digits 0-9
     print("\nPart 2: Multiclass Classification for digits 0-9")
     # Load training and validation data
@@ -127,6 +158,13 @@ def main():
     test_accuracy = np.mean(test_predictions == y_test)
     print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
 
+    # Save results for Part 2
+    results["Multiclass Classification (Part 2)"] = {
+        "Minimum Validation Error Fraction": f"{min_error_frac:.4f}",
+        "Test Accuracy": f"{test_accuracy * 100:.2f}%",
+        "Context": "Multiclass classification of digits 0-9 using perceptron."
+    }
+
     # Part 3: Neural Network with one hidden layer
     print("\nPart 3: Neural Network with one hidden layer")
     # Convert labels to one-hot encoding
@@ -152,6 +190,17 @@ def main():
     test_predictions = nn.predict(X_test)
     test_accuracy = np.mean(test_predictions == y_test)
     print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
+
+    # Save results for Part 3
+    results["Neural Network (Part 3)"] = {
+        "Best Validation Accuracy": f"{best_accuracy * 100:.2f}%",
+        "Test Accuracy": f"{test_accuracy * 100:.2f}%",
+        "Context": "Multiclass classification of digits 0-9 using a neural network with one hidden layer."
+    }
+
+    # Write results to output file
+    write_results_to_file(output_file, results)
+    print(f"\nResults saved to {output_file}")
 
 if __name__ == '__main__':
     main()

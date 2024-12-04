@@ -1,0 +1,23 @@
+Handwritten Digit Classification Results
+==================================================
+
+## Binary Classification (Part 1)
+--------------------------------------------------
+Minimum Validation Error Fraction: 0.0660
+Test Accuracy: 93.40%
+Context: Binary classification of digits 7 and 9 using perceptron.
+
+## Multiclass Classification (Part 2)
+--------------------------------------------------
+Minimum Validation Error Fraction: 0.2596
+Test Accuracy: 72.00%
+Context: Multiclass classification of digits 0-9 using perceptron.
+
+## Neural Network (Part 3)
+--------------------------------------------------
+Best Validation Accuracy: 82.92%
+Test Accuracy: 94.00%
+Context: Multiclass classification of digits 0-9 using a neural network with one hidden layer.
+
+==================================================
+End of Results
